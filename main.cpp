@@ -1,8 +1,6 @@
 #include <iostream>
 
 #include "list.h"
-#include "SingleLinkedList.h"
-#include "DualLinkedList.h"
 #include "testSingle.h"
 #include "testDual.h"
 #include <iostream>

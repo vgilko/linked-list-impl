@@ -1,7 +1,6 @@
 //
 // Created by avmd on 28.02.23.
 //
-#include "SingleLinkedList.h"
 #include "list.h"
 #include <stdexcept>
 #include <iostream>

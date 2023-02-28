@@ -2,7 +2,6 @@
 // Created by avmd on 28.02.23.
 //
 
-#include "DualLinkedList.h"
 #include "list.h"
 
 #include <iostream>
