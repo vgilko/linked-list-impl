@@ -83,20 +83,23 @@ namespace lab618 {
             }
 
             void operator++() {
-                if (m_pCurrent->pnext)
-                    m_pCurrent = m_pCurrent->pnext;
-                else m_pCurrent = nullptr;
+                m_pCurrent = m_pCurrent && m_pCurrent->pnext
+                             ? m_pCurrent->pnext
+                             : nullptr;
             }
 
             T getData() {
-                if (m_pCurrent)
-                    return m_pCurrent->data;
-                return T();
+                return m_pCurrent
+                       ? m_pCurrent->data
+                       : T();
             }
 
             T &operator*() {
                 if (m_pCurrent)
                     return m_pCurrent->data;
+
+                // если текущее значение нул, то операция невозможна, поэтому исключение
+                throw "Error! Invalid operation!";
             }
 
             leaf *getLeaf() {
@@ -114,7 +117,6 @@ namespace lab618 {
             }
 
             bool isValid() {
-
                 if (m_pCurrent)
                     return true;
                 return false;
@@ -246,7 +248,9 @@ namespace lab618 {
         }
 
         CIterator begin() {
-            return CIterator(m_pBegin);
+            return m_pBegin
+                   ? CIterator(m_pBegin)
+                   : nullptr;
         }
 
     private:
@@ -268,14 +272,19 @@ namespace lab618 {
     public:
         class CIterator {
         public:
-            CIterator(leaf *p) {
-                if (p->pprev != nullptr)
-                    m_pBegin = p->pprev;
-                else if (p->pnext == nullptr)
-                    m_pEnd = p->pnext;
+            CIterator() = default;
 
-                m_pBegin = p->pnext;
-                m_pCurrent = p;
+            CIterator(leaf *p) {
+                if (p) {
+                    if (p->pprev != nullptr)
+                        m_pBegin = p->pprev;
+                    else if (p->pnext == nullptr)
+                        m_pEnd = p->pnext;
+
+                    m_pBegin = p->pnext;
+                    m_pCurrent = p;
+                }
+
             }
 
             CIterator(const CIterator &src) {
@@ -324,6 +333,9 @@ namespace lab618 {
             T &operator*() {
                 if (m_pCurrent)
                     return m_pCurrent->data;
+
+                // если текущее значение нул, то операция невозможна, поэтому исключение
+                throw "Error! Invalid operation!";
             }
 
             explicit operator bool() const {
@@ -544,11 +556,15 @@ namespace lab618 {
         }
 
         CIterator begin() {
-            return CIterator(m_pBegin);
+            return m_pBegin
+                   ? CIterator(m_pBegin)
+                   : nullptr;
         }
 
         CIterator end() {
-            return CIterator(m_pEnd);
+            return m_pEnd
+                   ? CIterator(m_pEnd)
+                   : nullptr;
         }
 
     private:

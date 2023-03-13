@@ -156,7 +156,7 @@ namespace SingleLinkedListTest {
         std::cout << "OK | testPushFrontEmptyList\n";
     }
 
-    int runTestsOnSingleLinkedList() {
+    void runTestsOnSingleLinkedList() {
         testErase();
         testEraseLastElement();
         testEraseFirstElement();
